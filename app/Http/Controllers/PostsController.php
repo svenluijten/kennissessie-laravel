@@ -60,6 +60,8 @@ class PostsController extends Controller
         $input['user_id'] = Auth::id();
 
         $this->posts->create($input);
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -108,11 +110,13 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Post $post
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        $post->destroy();
+        $post->delete();
 
         return redirect()->back();
     }
