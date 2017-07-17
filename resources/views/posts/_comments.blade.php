@@ -7,15 +7,17 @@
                 <p>Author: {!! $comment->author !!}</p>
                 <p>Comment: {!! $comment->body !!}</p>
                 <p>Created at: {!! $comment->created_at !!}</p>
-                <form action="{!! route('comments.destroy', $comment->id) !!}"
-                      method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token"
-                           value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-danger btn-sm">
-                        Delete Comment
-                    </button>
-                </form>
+                @if(Auth::user())
+                    <form action="{!! route('comments.destroy', $comment->id) !!}"
+                          method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token"
+                               value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete Comment
+                        </button>
+                    </form>
+                @endif
                 <hr>
             @endforeach
         </div>

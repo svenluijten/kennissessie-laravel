@@ -110,12 +110,14 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Post $post
+     * @param $post
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post)
     {
+        $post = $this->posts->findOrFail($post);
+        $post->comments()->delete();
         $post->delete();
 
         return redirect()->back();
