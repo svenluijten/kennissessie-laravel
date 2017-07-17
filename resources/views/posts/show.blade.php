@@ -15,8 +15,13 @@
                                 <hr>
                                 <p>Author: {!! $post->author->name !!}</p>
                                 <p>Created on: {!! $post->created_at !!}</p>
+                                <hr>
                             </div>
                         </div>
+
+                        @include('posts._comments')
+
+                        @include('posts._comment_form')
                     </div>
                 </div>
             </div>

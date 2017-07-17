@@ -24,6 +24,16 @@ class Post extends Model
     }
 
     /**
+     * Returns the comments of the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Returns the title with uppercase first
      *
      * @return string

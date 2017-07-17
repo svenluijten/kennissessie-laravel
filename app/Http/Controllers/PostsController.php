@@ -31,7 +31,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->with('author')->get();
+        $posts = $this->posts->with(['author', 'comments'])->get();
 
         return view('posts.index', compact('posts'));
     }

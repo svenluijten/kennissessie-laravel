@@ -10,10 +10,10 @@
                         <form class="form-horizontal" method="POST" action="{{ route('posts.store') }}">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="title" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="title"
+                                    <input id="title" type="text" class="form-control" name="title"
                                            value="{{ old('title') }}" autofocus>
 
                                     @if ($errors->has('title'))
