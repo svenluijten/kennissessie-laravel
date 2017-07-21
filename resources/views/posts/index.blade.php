@@ -42,17 +42,16 @@
                                                                 post</a>
                                                         </li>
                                                         <li>
-
                                                             <form action="{!! route('posts.destroy', $post->id) !!}"
                                                                   method="POST">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                        value="{{ csrf_token() }}">
-                                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                                Delete action:
+                                                                <button type="submit" id="submit" class="btn btn-danger btn-sm">
                                                                     Delete Post
                                                                 </button>
                                                             </form>
-
                                                         </li>
                                                     @endif
                                                 </ul>

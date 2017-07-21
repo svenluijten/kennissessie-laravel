@@ -22,6 +22,7 @@ class PostsController extends Controller
     public function __construct(Post $posts)
     {
         $this->posts = $posts;
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -55,11 +56,13 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $input = $request->all();
-        $input['slug'] = str_slug($input['title']);
-        $input['user_id'] = Auth::id();
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->slug = str_slug($post->title);
+        $post->author()->associate(Auth::user());
 
-        $this->posts->create($input);
+        $post->save();
 
         return redirect()->route('posts.index');
     }
@@ -100,9 +103,8 @@ class PostsController extends Controller
     {
         $input = $request->all();
         $input['slug'] = str_slug($input['title']);
-        $input['user_id'] = Auth::id();
 
-        $post->update($input);
+        $post->author()->associate(Auth::id())->update($input);
 
         return redirect()->back();
     }
