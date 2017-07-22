@@ -16,6 +16,15 @@ class PostsController extends Controller
         ]);
     }
 
+    public function show($post)
+    {
+        $post = Post::where('id', '=', $post)->firstOrFail();
+
+        return view('posts.show', [
+            'post' => $post,
+        ]);
+    }
+
     public function create()
     {
         return view('posts.create');
