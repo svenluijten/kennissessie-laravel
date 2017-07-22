@@ -26,6 +26,7 @@ class PostsController extends Controller
         Post::create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('posts.index');
