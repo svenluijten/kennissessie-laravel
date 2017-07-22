@@ -37,4 +37,21 @@ class PostsController extends Controller
 
         return redirect()->route('posts.show', $post);
     }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
+    }
+
+    public function update(Post $post, Request $request)
+    {
+        $post->update([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+        ]);
+
+        return redirect()->route('posts.show', $post);
+    }
 }

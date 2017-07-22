@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <a href="{{ route('posts.edit', $post) }}" class="btn btn-default">Edit</a>
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
                         <span class="pull-left">{{ $post->title }}</span>
