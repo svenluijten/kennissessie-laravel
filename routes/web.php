@@ -11,4 +11,8 @@
 |
 */
 
-Route::get('/', 'StaticPagesController@home');
+Route::get('/', 'StaticPagesController@home')
+    ->name('home')
+    ->middleware('auth');
+
+Auth::routes();
