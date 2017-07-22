@@ -18,3 +18,5 @@ Route::get('/', 'StaticPagesController@home')
 Auth::routes();
 
 Route::get('/posts', 'PostsController@index')->name('posts.index');
+Route::post('/posts', 'PostsController@store');
+Route::get('/posts/create', 'PostsController@create')->name('posts.create');
