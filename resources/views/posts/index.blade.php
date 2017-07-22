@@ -9,7 +9,7 @@
                 @foreach ($posts as $post)
                     <div class="panel panel-default">
                         <div class="panel-heading clearfix">
-                            <span class="pull-left">{{ $post->title }}</span>
+                            <a href="{{ route('posts.show', $post) }}" class="pull-left">{{ $post->title }}</a>
 
                             <span class="pull-right label label-info" title="{{ $post->created_at }}">
                                 {{ $post->created_at->diffForHumans() }}
