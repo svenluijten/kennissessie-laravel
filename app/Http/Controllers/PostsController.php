@@ -23,10 +23,9 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        Post::create([
+        auth()->user()->posts()->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('posts.index');
