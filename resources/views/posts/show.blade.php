@@ -4,7 +4,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <a href="{{ route('posts.edit', $post) }}" class="btn btn-default">Edit</a>
+                @can ('author', $post)
+                    <form action="{{ route('posts.show', $post) }}" method="POST" class="form-inline">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+
+                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-default">Edit</a>
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+
+                    <hr>
+                @endcan
+
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
                         <span class="pull-left">{{ $post->title }}</span>

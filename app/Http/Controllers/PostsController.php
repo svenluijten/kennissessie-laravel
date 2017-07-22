@@ -61,6 +61,8 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('posts.edit', [
             'post' => $post,
         ]);
@@ -74,8 +76,24 @@ class PostsController extends Controller
      */
     public function update(Post $post, UpdatePostRequest $request)
     {
+        $this->authorize('update', $post);
+
         $post->update($request->only(['title', 'body']));
 
         return redirect()->route('posts.show', $post);
+    }
+
+    /**
+     * @param \App\Post $post
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Post $post)
+    {
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }
