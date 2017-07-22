@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Post;
-use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -28,12 +29,11 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        $post = auth()->user()->posts()->create([
-            'title' => $request->get('title'),
-            'body' => $request->get('body'),
-        ]);
+        $post = auth()->user()->posts()->create(
+            $request->only(['title', 'body'])
+        );
 
         return redirect()->route('posts.show', $post);
     }
@@ -45,12 +45,9 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update(Post $post, Request $request)
+    public function update(Post $post, UpdatePostRequest $request)
     {
-        $post->update([
-            'title' => $request->get('title'),
-            'body' => $request->get('body'),
-        ]);
+        $post->update($request->only(['title', 'body']));
 
         return redirect()->route('posts.show', $post);
     }
