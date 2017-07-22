@@ -6,41 +6,21 @@
             <div class="col-md-8 col-md-offset-2">
                 <h1>All Posts</h1>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <span class="pull-left">Post Title</span>
+                @foreach ($posts as $post)
+                    <div class="panel panel-default">
+                        <div class="panel-heading clearfix">
+                            <span class="pull-left">{{ $post->title }}</span>
 
-                        <span class="pull-right label label-info">3 minutes ago</span>
+                            <span class="pull-right label label-info" title="{{ $post->created_at }}">
+                                {{ $post->created_at->diffForHumans() }}
+                            </span>
+                        </div>
+
+                        <div class="panel-body">
+                            {{ str_limit($post->body, 100) }}
+                        </div>
                     </div>
-
-                    <div class="panel-body">
-                        Part of the post body. Maybe the first 100 characters?
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <span class="pull-left">Post Title</span>
-
-                        <span class="pull-right label label-info">4 days ago</span>
-                    </div>
-
-                    <div class="panel-body">
-                        Part of the post body. Maybe the first 100 characters?
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading clearfix">
-                        <span class="pull-left">Post Title</span>
-
-                        <span class="pull-right label label-info">1 year ago</span>
-                    </div>
-
-                    <div class="panel-body">
-                        Part of the post body. Maybe the first 100 characters?
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
