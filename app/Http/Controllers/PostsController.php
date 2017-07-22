@@ -16,10 +16,8 @@ class PostsController extends Controller
         ]);
     }
 
-    public function show($post)
+    public function show(Post $post)
     {
-        $post = Post::where('id', '=', $post)->firstOrFail();
-
         return view('posts.show', [
             'post' => $post,
         ]);
@@ -32,11 +30,11 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        auth()->user()->posts()->create([
+        $post = auth()->user()->posts()->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
         ]);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', $post);
     }
 }
