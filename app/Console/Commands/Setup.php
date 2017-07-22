@@ -29,9 +29,13 @@ class Setup extends Command
     {
         $this->call('migrate:fresh');
 
-        factory('App\User')->create([
+        $user = factory('App\User')->create([
             'name' => 'Sven Luijten',
             'email' => 'sven@e-sites.nl',
+        ]);
+
+        factory('App\Post', 25)->create([
+            'user_id' => $user->id,
         ]);
     }
 }
