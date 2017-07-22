@@ -17,7 +17,9 @@ Route::get('/', 'StaticPagesController@home')
 
 Auth::routes();
 
-Route::get('/posts', 'PostsController@index')->name('posts.index');
-Route::post('/posts', 'PostsController@store');
-Route::get('/posts/create', 'PostsController@create')->name('posts.create');
-Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('', 'PostsController@index')->name('posts.index');
+    Route::post('', 'PostsController@store');
+    Route::get('/create', 'PostsController@create')->name('posts.create');
+    Route::get('/{post}', 'PostsController@show')->name('posts.show');
+});
