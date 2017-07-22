@@ -16,3 +16,5 @@ Route::get('/', 'StaticPagesController@home')
     ->middleware('auth');
 
 Auth::routes();
+
+Route::get('/posts', 'PostsController@index')->name('posts.index');
