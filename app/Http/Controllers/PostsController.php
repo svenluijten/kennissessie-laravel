@@ -8,6 +8,9 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $posts = Post::latest()->get();
@@ -17,6 +20,11 @@ class PostsController extends Controller
         ]);
     }
 
+    /**
+     * @param \App\Post $post
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Post $post)
     {
         return view('posts.show', [
@@ -24,11 +32,19 @@ class PostsController extends Controller
         ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('posts.create');
     }
 
+    /**
+     * @param \App\Http\Requests\CreatePostRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(CreatePostRequest $request)
     {
         $post = auth()->user()->posts()->create(
@@ -38,6 +54,11 @@ class PostsController extends Controller
         return redirect()->route('posts.show', $post);
     }
 
+    /**
+     * @param \App\Post $post
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Post $post)
     {
         return view('posts.edit', [
@@ -45,6 +66,12 @@ class PostsController extends Controller
         ]);
     }
 
+    /**
+     * @param \App\Post                            $post
+     * @param \App\Http\Requests\UpdatePostRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Post $post, UpdatePostRequest $request)
     {
         $post->update($request->only(['title', 'body']));
