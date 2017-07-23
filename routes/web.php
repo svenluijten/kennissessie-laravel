@@ -25,4 +25,11 @@ Route::group(['prefix' => 'posts'], function () {
     Route::put('/{post}', 'PostsController@update');
     Route::delete('/{post}', 'PostsController@delete');
     Route::get('/{post}/edit', 'PostsController@edit')->name('posts.edit');
+
+    Route::group(['prefix' => '{post}/comments'], function () {
+        Route::post('', 'CommentsController@store')->name('comments.store');
+        Route::get('/{comment}', 'CommentsController@edit')->name('comments.edit');
+        Route::put('/{comment}', 'CommentsController@update');
+        Route::delete('/{comment}', 'CommentsController@delete');
+    });
 });

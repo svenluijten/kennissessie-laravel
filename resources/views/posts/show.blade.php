@@ -29,6 +29,25 @@
                         {{ $post->body }}
                     </div>
                 </div>
+
+                @auth
+                    <form action="{{ route('comments.store', $post) }}" method="POST">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : null }}}">
+                            <label for="comment">Comment:</label>
+                            <textarea id="comment" class="form-control" name="comment" rows="4">{{ old('comment') ?: null }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Add Comment" class="btn btn-primary">
+                        </div>
+                    </form>
+                @endauth
+
+                @foreach ($post->comments as $comment)
+                    @include ('shared.comment')
+                @endforeach
             </div>
         </div>
     </div>
