@@ -47,6 +47,8 @@ class CommentsController extends Controller
 
         $this->comment->create($input);
 
+        flash('Comment: ' . $post->title . ' created', 'success');
+
         return redirect()->back();
     }
 
@@ -61,6 +63,8 @@ class CommentsController extends Controller
     {
         $comment = $this->comment->findOrFail($id);
         $comment->delete();
+
+        flash('Comment: ' . $comment->title . ' removed', 'success');
 
         return redirect()->back();
     }

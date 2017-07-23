@@ -64,6 +64,8 @@ class PostsController extends Controller
 
         $post->save();
 
+        flash('Post: ' . $post->title . ' created', 'success');
+
         return redirect()->route('posts.index');
     }
 
@@ -106,6 +108,8 @@ class PostsController extends Controller
 
         $post->author()->associate(Auth::id())->update($input);
 
+        flash('Post: ' . $post->title . ' updated', 'success');
+
         return redirect()->back();
     }
 
@@ -121,6 +125,8 @@ class PostsController extends Controller
         $post = $this->posts->findOrFail($post);
         $post->comments()->delete();
         $post->delete();
+
+        flash('Post: ' . $post->title . ' removed', 'success');
 
         return redirect()->back();
     }

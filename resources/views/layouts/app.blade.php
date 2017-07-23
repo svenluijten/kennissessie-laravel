@@ -89,8 +89,9 @@
             </div>
         </div>
     </nav>
-
+    @include('layouts.flash.message')
     @yield('content')
+
 </div>
 
 <!-- Scripts -->

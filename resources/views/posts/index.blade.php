@@ -47,7 +47,6 @@
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                        value="{{ csrf_token() }}">
-                                                                Delete action:
                                                                 <button type="submit" id="submit" class="btn btn-danger btn-sm">
                                                                     Delete Post
                                                                 </button>
