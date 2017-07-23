@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Post;
@@ -32,7 +33,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->with(['author', 'comments'])->get();
+        $posts = $this->posts->with(['author', 'comments'])->orderBy('created_at', 'DESC')->paginate(6);
 
         return view('posts.index', compact('posts'));
     }
@@ -65,6 +66,7 @@ class PostsController extends Controller
         $post->save();
 
         flash('Post: ' . $post->title . ' created', 'success');
+        event(new PostCreated($post));
 
         return redirect()->route('posts.index');
     }

@@ -21,7 +21,11 @@
                                     @foreach($posts as $post)
                                         <tr>
                                             <td>
-                                                <p>{!! $post->title !!}</p>
+                                                <p>
+                                                    <a href="{!! route('posts.show', $post->id) !!}">
+                                                        {{ $post->title }}
+                                                    </a>
+                                                </p>
                                             </td>
                                             <td>
                                                 <p>{!! $post->author->name !!}</p>
@@ -31,11 +35,6 @@
                                             </td>
                                             <td>
                                                 <ul>
-                                                    <li>
-                                                        <a href="{!! route('posts.show', $post->id) !!}">
-                                                            View post: {{ $post->title }}
-                                                        </a>
-                                                    </li>
                                                     @if(Auth::user())
                                                         <li>
                                                             <a href="{!! route('posts.edit', $post->id) !!}">Edit
@@ -47,7 +46,8 @@
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                        value="{{ csrf_token() }}">
-                                                                <button type="submit" id="submit" class="btn btn-danger btn-sm">
+                                                                <button type="submit" id="submit"
+                                                                        class="btn btn-danger btn-sm">
                                                                     Delete Post
                                                                 </button>
                                                             </form>
@@ -60,6 +60,7 @@
                                     </tbody>
                                     </thead>
                                 </table>
+                                {!! $posts->links() !!}
                             </div>
                         @else
                             <p>There are no posts available!</p>

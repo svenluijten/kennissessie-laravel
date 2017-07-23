@@ -1,7 +1,7 @@
 @if($post->comments->count())
     <div class="row">
         <div class="col-sm-12">
-            <h2>Comments:</h2>
+            <h2>Comments ({!! $post->comments->count() !!}) :</h2>
             <hr>
             @foreach($post->comments as $comment)
                 <p>Author: {!! $comment->author !!}</p>
