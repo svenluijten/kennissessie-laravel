@@ -27,8 +27,11 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
+        $comments = $post->comments()->latest()->paginate(3);
+
         return view('posts.show', [
             'post' => $post,
+            'comments' => $comments,
         ]);
     }
 

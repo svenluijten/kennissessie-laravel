@@ -45,9 +45,11 @@
                     </form>
                 @endauth
 
-                @foreach ($post->comments as $comment)
+                @foreach ($comments as $comment)
                     @include ('shared.comment')
                 @endforeach
+
+                {{ $comments->links() }}
             </div>
         </div>
     </div>
