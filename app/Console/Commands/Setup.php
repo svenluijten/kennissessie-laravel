@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Comment;
 use Illuminate\Console\Command;
 
 class Setup extends Command
@@ -34,7 +35,9 @@ class Setup extends Command
             'email' => 'sven@e-sites.nl',
         ]);
 
-        factory('App\Post', 25)->create([
+        Comment::flushEventListeners();
+
+        factory('App\Comment', 25)->create([
             'user_id' => $user->id,
         ]);
     }
